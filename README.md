@@ -1,4 +1,4 @@
-# Docker CI/CD Pipiline with Python
+# Docker CI/CD Pipeline with Python
 
 https://docs.docker.com/language/python/
 
