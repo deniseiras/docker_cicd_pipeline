@@ -25,14 +25,15 @@ Check Prerequisites and Overview section at https://docs.docker.com/language/pyt
 
 # Create a sample Python application
 
-## Create python venv
+## Create python 3.8 venv
 The sample application (app.py) uses the popular Flask framework. Execute the commands to create venv, install Flask and save the projetct requirements to requirements.txt, which will be used to create the Docker container.
+
+**Ensure using python 3.8 for this tutorial, otherwise your Docker could not work even if the app works**
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install Flask
 python3 -m pip freeze > requirements.txt
-touch app.py
 ```
 
 ## Test application
@@ -50,10 +51,71 @@ Switch back to the terminal where the server is running and you should see the f
 127.0.0.1 - - [22/Sep/2020 11:07:41] "GET / HTTP/1.1" 200 -
 ```
 
-<!-- 
 ## Create a new Dockerfile which contains instructions required to build a Python image
 
+Now that the application is running, you can create a Dockerfile from it. Dockerfile is a template to create your docker image
+
+```Dockerfile
+# syntax=docker/dockerfile:1
+
+# Docker images can inherit from other images. You can use the official Python image that has all the tools and packages needed to run a Python application.
+FROM python:3.8-slim-buster
+
+# This instructs Docker to use this path as the default location for all subsequent commands. This means you can use relative file paths based on the working directory instead of full file paths.
+WORKDIR /app
+
+# The COPY command takes two parameters. The first parameter tells Docker what file(s) you would like to copy into the image. The second parameter tells Docker where to copy that file(s) to. For this example, copy the requirements.txt file into the working directory /app.
+COPY requirements.txt requirements.txt
+
+RUN pip3 install -r requirements.txt
+
+# This COPY command takes all the files located in the current directory and copies them into the image.
+COPY . .
+
+# Now, tell Docker what command to run when the image is executed inside a container using the CMD command. Note that you need to make the application externally visible (i.e. from outside the container) by specifying --host=0.0.0.0.
+CMD ["python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+```
+
 ## Build an image and run the newly built image as a container
+
+Now that you’ve created the Dockerfile, let’s build the image. To do this, use the docker build command. The docker build command builds Docker images from a Dockerfile and a “context”. A build’s context is the set of files located in the specified PATH or URL. The Docker build process can access any of the files located in this context.
+
+The build command optionally takes a --tag flag. The tag sets the name of the image and an optional tag in the format name:tag. Leave off the optional tag for now to help simplify things. If you don’t pass a tag, Docker uses “latest” as its default tag.
+
+Build the Docker image.
+
+```bash
+sudo docker build --tag python-docker .
+```
+```
+[+] Building 2.7s (10/10) FINISHED
+ => [internal] load build definition from Dockerfile
+ => => transferring dockerfile: 203B
+ => [internal] load .dockerignore
+ => => transferring context: 2B
+ => [internal] load metadata for docker.io/library/python:3.8-slim-buster
+ => [1/6] FROM docker.io/library/python:3.8-slim-buster
+ => [internal] load build context
+ => => transferring context: 953B
+ => CACHED [2/6] WORKDIR /app
+ => [3/6] COPY requirements.txt requirements.txt
+ => [4/6] RUN pip3 install -r requirements.txt
+ => [5/6] COPY . .
+ => [6/6] CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
+ => exporting to image
+ => => exporting layers
+ => => writing image sha256:8cae92a8fbd6d091ce687b71b31252056944b09760438905b726625831564c4c
+ => => naming to docker.io/library/python-docker
+```
+
+To see a list of images you have on your local machine, you have two options. One is to use the Docker CLI and the other is to use Docker Desktop. As you are working in the terminal already, take a look at listing images using the CLI.
+
+To list images, run the command:
+```
+sudo docker images
+```
+
+<!-- 
 
 ## Set up volumes and networking
 
