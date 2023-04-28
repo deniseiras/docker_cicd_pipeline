@@ -30,15 +30,15 @@ The sample application (app.py) uses the popular Flask framework. Execute the co
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-(.venv) $ python3 -m pip install Flask
-(.venv) $ python3 -m pip freeze > requirements.txt
-(.venv) $ touch app.py
+python3 -m pip install Flask
+python3 -m pip freeze > requirements.txt
+touch app.py
 ```
 
 ## Test application
 ```bash
-# source .venv/bin/activate if not activated
-(.venv) $ python3 -m flask run
+# run "source .venv/bin/activate" if venv not activated
+python3 -m flask run
 ```
 Open a new browser and navigate to http://localhost:5000
 
