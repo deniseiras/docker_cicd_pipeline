@@ -57,7 +57,7 @@ def db_init():
     cursor.execute("CREATE TABLE widgets (name VARCHAR(255), description VARCHAR(255))")
     cursor.close()
 
-    return 'init database'
+    return 'Database Initialized!\n'
 
 if __name__ == "__main__":
     app.run(host ='0.0.0.0')
