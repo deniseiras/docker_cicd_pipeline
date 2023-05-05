@@ -15,7 +15,7 @@ This repository contains a evolutionary tutorial that teaches you how to:
 - Deploy your application to the cloud using Docker AWS ECS integration.
 
 
-This tutotial implements the tutorial at https://docs.docker.com/language/python/ .
+This tutotial implements the tutorial at https://docs.docker.com/language/python/ , distributing the files with some improvements and facilities.
 
 # Prerequisites
 
@@ -211,7 +211,7 @@ Now we can build our "dev" image.
 sudo docker build --tag python-docker-dev .
 ```
 
-**If you have any containers running from the previous sections using the name rest-server or port 8000, stop them now. Check section Usefull Docker commands**
+**If you have any containers running from the previous sections using the name rest-server or port 8000, stop them now. (`sudo docker ps; sudo docker stop "containerId"`)**
 
 Now, let’s add the container to the database network and then run our container. This allows us to access the database by its container name.
 
@@ -236,13 +236,45 @@ curl http://localhost:8000/widgets
 
 You should receive and empty JSON back from our service: `[]`
 
-
-<!-- 
-
-# TODO
-
 ## Orchestrate containers using Compose
 
+Now we’ll create a Compose file to start our python-docker and the MySQL database using a single command.
+
+The docker-compose.dev.yml Compose file is super convenient as we do not have to type all the parameters to pass to the docker run command. 
+
+We expose port 8000 so that we can reach the dev web server inside the container. We also map our local source code into the running container to make changes in our text editor and have those changes picked up in the container.
+
+Another really cool feature of using a Compose file is that we have service resolution set up to use the service names. Therefore, we are now able to use “mysqldb” in our connection string. The reason we use “mysqldb” is because that is what we’ve named our MySQL service as in the Compose file.
+
+Note that we did not specify a network for those 2 services. When we use docker-compose it automatically creates a network and connect the services to it. For more information see Networking in Compose
+
+**If you have any containers running from the previous sections, stop them now (`sudo docker ps; sudo docker stop "containerId"`).**
+
+Now, to start our application and to confirm that it is running properly, run the following command:
+```bash
+sudo docker compose -f docker-compose.dev.yml up --build
+```
+
+We pass the --build flag so Docker will compile our image and then start the containers.
+
+Now let’s test our API endpoint. Open a new terminal then make a GET request to the server using the curl commands:
+
+```bash
+ curl http://localhost:8000/initdb
+ curl http://localhost:8000/widgets
+```
+You should receive the following responses:
+```bash
+Database Initilized!
+[]
+```
+
+
+[]
+This is because our database is empty.
+
+<!-- 
+# TODO
 ## Use containers for development
 
 ## Configure a CI/CD pipeline for your application using GitHub Actions -->

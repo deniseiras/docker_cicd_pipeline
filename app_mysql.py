@@ -30,7 +30,7 @@ def get_widgets():
 
     cursor.close()
 
-    return json.dumps(json_data)
+    return json.dumps(json_data)+"\n"
 
 @app.route('/initdb')
 def db_init():
