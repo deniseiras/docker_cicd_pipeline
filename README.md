@@ -12,7 +12,7 @@ This repository contains a evolutionary tutorial that teaches you how to:
 - Orchestrate containers using Compose
 - Use containers for development
 - Configure a CI/CD pipeline for your application using GitHub Actions, deploying in Docker Hub.
-- Deploy your application to the cloud using Docker AWS ECS integration.
+- Deploy your application to the cloud.
 
 
 This tutotial implements the tutorial at https://docs.docker.com/language/python/ , distributing the files with some improvements and facilities.
@@ -335,8 +335,15 @@ For more information about the YAML syntax used here, see [Workflow syntax for G
 
 If you see the new repository in that list, it means the GitHub Actions successfully pushed the image to Docker Hub!
 
-**Congratulations!!! You finished all tutorial!**
 
+**Congratulations!!! You finished the tutorial!**
+
+
+# Next steps: Deploy your application to the cloud
+
+Now that we have configured a CI/CD pipeline, let’s look at how we can deploy the application. Docker supports deploying containers on Azure ACI and AWS ECS. You can also deploy your application to Kubernetes if you have enabled Kubernetes in Docker Desktop.
+
+For advancing in deploy, you can use the [original tutorials from docker](https://docs.docker.com/language/python/deploy/).
 
 # Useful docker commands
 
