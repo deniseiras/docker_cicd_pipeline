@@ -324,7 +324,8 @@ For more information about the YAML syntax used here, see [Workflow syntax for G
 
 ### Step 3: Run the workflow
 
-1. Make a change in any file, for example, include a blank line at the end of this README.md, commit and push to the main branch. This will trigger the GitHub Action.
+1. Making a change in any file, committing and pushing to the main branch will trigger the GitHub Actions at `.github/workflows` directory. 
+    - A good idea is to push your requirements.txt file, which could be different than the initial version from the repository
 
 2. Go to the Actions tab. It displays the workflow. Selecting the workflow shows you the breakdown of all the steps.
 
