@@ -3,11 +3,7 @@ name: ci
 on:
   push:
     branches:
-      # change the branch name to execute. Ex: on main
-      # - "main"
-      
-      # non existent branch name to disable jobs
-      - "disabled"
+      - "main"
 
 jobs:
   build:

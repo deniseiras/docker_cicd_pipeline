@@ -37,6 +37,13 @@ sudo sh ./get-docker.sh  #  --dry-run
 
 # Create a sample Python application
 
+## Fork this repository
+
+You you need to fork this repository (instead of just using) because you need to configure GithHub actions ahead.
+```bash
+git clone https://github.com/deniseiras/docker_cicd_pipeline.git
+```
+
 ## Create python 3.8 venv
 The sample application (app.py) uses the popular Flask framework. Execute the commands to create venv, install Flask and save the projetct requirements to requirements.txt, which will be used to create the Docker container.
 
@@ -273,12 +280,59 @@ Database Initilized!
 []
 This is because our database is empty.
 
-<!-- 
-# TODO
-## Use containers for development
+## Configure a CI/CD pipeline for your application using GitHub Actions 
 
-## Configure a CI/CD pipeline for your application using GitHub Actions -->
+This tutorial walks you through the process of setting up and using Docker GitHub Actions for building Docker images, and pushing images to Docker Hub. You will complete the following steps:
 
+1. Step 1: Configure the Docker Hub secret
+2. Step 2: Define the GitHub Actions workflow.
+3. Step 3: Run the workflow.
+
+To follow this tutorial, you need to [Create your Docker ID](https://hub.docker.com/) (if you not have any) and a GitHub account. 
+
+### Step 1: Configure the Docker Hub secrets.
+
+1. Open the repository Settings, and go to Secrets > Actions.
+2. Create a new secret named `DOCKERHUB_USERNAME` and your Docker ID as value.
+3. Create a new [Personal Access Token (PAT)](https://docs.docker.com/docker-hub/access-tokens/#create-an-access-token) for Docker Hub. You can name this token `clockboxci`.
+4. Add the PAT as a second secret in your GitHub repository, with the name `DOCKERHUB_TOKEN`.
+
+### Step 2: Define the GitHub Actions workflow
+
+Set up your GitHub Actions workflow for building and pushing the image to Docker Hub.
+
+The workflow is under your `.github/workflows/main.yml`.
+
+the basic definitios are:
+- `name`: the name of this workflow.
+- `on.push.branches`: specifies that this workflow should run on every push event for the branches in the list.
+- `jobs`: creates a job ID (build) and declares the type of machine that the job should run on.
+
+The job defined on YAML snippet contains a sequence of steps that:
+
+- Checks out the repository on the build machine.
+- Signs in to Docker Hub, using the [Docker Login](https://github.com/marketplace/actions/docker-login) action and your Docker Hub credentials.
+- Creates a BuildKit builder instance using the [Docker Setup Buildx action](https://github.com/marketplace/actions/docker-setup-buildx).
+- Builds the container image and pushes it to the Docker Hub repository, using [Build and push Docker images](https://github.com/marketplace/actions/build-and-push-docker-images).
+    - The with key lists a number of input parameters that configures the step:
+      - `context`: the build context.
+      - `file`: filepath to the Dockerfile.
+      - `push`: tells the action to upload the image to a registry after building it.
+      - `tags`: tags that specify where to push the image.
+
+For more information about the YAML syntax used here, see [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
+
+### Step 3: Run the workflow
+
+1. Make a change in any file, for example, include a blank line at the end of this README.md, commit and push to the main branch. This will trigger the GitHub Action.
+
+2. Go to the Actions tab. It displays the workflow. Selecting the workflow shows you the breakdown of all the steps.
+
+3. When the workflow is complete, go to your [repositories on Docker Hub](https://hub.docker.com/repositories).
+
+If you see the new repository in that list, it means the GitHub Actions successfully pushed the image to Docker Hub!
+
+**Congratulations!!! You finished all tutorial!**
 
 
 # Useful docker commands
