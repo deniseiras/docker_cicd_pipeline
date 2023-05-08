@@ -11,7 +11,7 @@ This repository contains a evolutionary tutorial that teaches you how to:
 - Set up volumes and networking
 - Orchestrate containers using Compose
 - Use containers for development
-- Configure a CI/CD pipeline for your application using GitHub Actions
+- Configure a CI/CD pipeline for your application using GitHub Actions, deploying in Docker Hub.
 - Deploy your application to the cloud using Docker AWS ECS integration.
 
 
@@ -327,7 +327,7 @@ For more information about the YAML syntax used here, see [Workflow syntax for G
 1. Making a change in any file, committing and pushing to the main branch will trigger the GitHub Actions at `.github/workflows` directory. 
     - A good idea is to push your requirements.txt file, which could be different than the initial version from the repository
 
-2. Go to the Actions tab. It displays the workflow. Selecting the workflow shows you the breakdown of all the steps.
+2. Go to the Actions tab. It displays the workflow. Selecting the workflow shows you the breakdown of all the steps, like the image below:
 
 3. When the workflow is complete, go to your [repositories on Docker Hub](https://hub.docker.com/repositories).
 
