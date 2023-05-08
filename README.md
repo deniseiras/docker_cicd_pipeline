@@ -335,8 +335,13 @@ For more information about the YAML syntax used here, see [Workflow syntax for G
 
 If you see the new repository in that list, it means the GitHub Actions successfully pushed the image to Docker Hub!
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/6113640/236882371-df56a8a2-5990-4a3d-838c-d2226e6280af.png" alt="Alt text">
+   
+You finished the tutorial! 👏 👏 👏
+</p>
 
-**Congratulations!!! You finished the tutorial!**
+Cheers! 🍻
 
 
 # Next steps: Deploy your application to the cloud
