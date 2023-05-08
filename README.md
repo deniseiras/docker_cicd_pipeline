@@ -337,9 +337,8 @@ If you see the new repository in that list, it means the GitHub Actions successf
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/6113640/236882371-df56a8a2-5990-4a3d-838c-d2226e6280af.png" alt="Alt text">
-   
-You finished the tutorial! 👏 👏 👏
 </p>
+<p align="center">You finished the tutorial! 👏 👏 👏</p>
 
 Cheers! 🍻
 
