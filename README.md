@@ -328,6 +328,8 @@ For more information about the YAML syntax used here, see [Workflow syntax for G
     - A good idea is to push your requirements.txt file, which could be different than the initial version from the repository
 
 2. Go to the Actions tab. It displays the workflow. Selecting the workflow shows you the breakdown of all the steps, like the image below:
+![image](https://user-images.githubusercontent.com/6113640/236876664-f681058f-7320-4f6f-93f4-5eb56a933462.png)
+
 
 3. When the workflow is complete, go to your [repositories on Docker Hub](https://hub.docker.com/repositories).
 
